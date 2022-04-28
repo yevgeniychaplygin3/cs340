@@ -62,10 +62,15 @@ def cashiers():
 # the cashier form is submitted, then this function will get called which renders the cashier_results.html template, and passes in the inputs
 @webapp.route('/cashier_results', methods=['GET', 'POST'])
 def cashier_results():
+
+    headings = ("First Name", "Last Name", "Lane", "Day Total", "Day Worked")
+    data = request.args
+    print(data)
+    
     if request.method == 'GET':
-        return render_template('cashier_results.html',  args=request.args)
-    elif request.method == 'POST':
-        return  render_template('cashier_results.html',  form=request.form)
+        return render_template('cashiers.html',  headings=headings, data=data)
+    # elif request.method == 'POST':
+    #     return  render_template('cashier_results.html',  form=request.form)
 
 # the cashier form is submitted, then this function will get called which renders the  template, and passes in the arguments
 @webapp.route('/customer_results', methods=['GET', 'POST'])
@@ -78,16 +83,16 @@ def customer_results():
 @webapp.route('/purchases_results', methods=['GET', 'POST'])
 def purchases_results():
     if request.method == 'GET':
-        return render_template('purchase_results.html')
+        return render_template('/index.html')
     elif request.method == 'POST':
-        return  render_template('purchase_results.html')
+        return  render_template('/index.html')
 
 @webapp.route('/products_results', methods=['GET', 'POST'])
 def products_results():
     if request.method == 'GET':
-        return render_template('products_results.html')
+        return render_template('/index.html')
     elif request.method == 'POST':
-        return  render_template('products_results.html')
+        return  render_template('/index.html')
 
 
 if __name__ == "__main__":
