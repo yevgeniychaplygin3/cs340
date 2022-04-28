@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, inital-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Results</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block title %}
+Customers Page
+{% endblock %}
+
+{% block container %}
     <div id="customers">
         <div>
             <label>First Name</label>
@@ -31,6 +29,4 @@
     <a href="/">Back to Home</a>
 
     </form>
-</body>
-
-</html>
+{% endblock %}
