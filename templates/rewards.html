@@ -5,21 +5,35 @@ Rewards Page
 {% endblock %}
 
 {% block container %}
-    <form action="">
-    <div id="rewards">
-        <div>
-            <label>Points</label>
+<div id="rewards" style="margin-left: 20px; margin-top: 20px;">
+    <form action=""  class="form-group">
+        <h4>Add a new rewards option to the data base. Insert the number of points needed and the discount amount.</h4>
+        <div class="form-group">
+            <label class="">Points</label>
             <input name="rewardpoints">
         </div>
-        <div>
-            <label>Discount</label>
-            <input name="discount">
+        <div class="form-group">
+            <label for="selectdiscount">Discount</label>
+            <select name="selectdiscount" id="discount">
+                <option value="5">1%</option>
+                <option value="5">5%</option>
+                <option value="10">10%</option>
+                <option value="20">20%</option>
+                <option value="30">30%</option>
+                <option value="40">40%</option>
+                <option value="50">50%</option>
+            </select>
         </div>
-        <div>
+        <div class="form-group">
             <button>Submit</button>
         </div>
-    </div>
+    
+    <h4 class="form-group">Retreive all rewards from the database</h4>
+    <button class="form-group">Retreive current rewards</button>
+    <br>
+
     <a href="/">Back to Home</a>
 
     </form>
+</div>
 {% endblock %}
