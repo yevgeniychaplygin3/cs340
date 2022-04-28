@@ -1,6 +1,8 @@
+from crypt import methods
 import MySQLdb
 import flask
-from flask import render_template
+from flask import render_template, request, redirect
+
 
 def read_mysql_config(mysql_config_file_name: str):
     with open(mysql_config_file_name, "r") as mysql_conf:
@@ -54,6 +56,39 @@ def products():
 @webapp.route('/cashiers/')
 def cashiers():
     return render_template('cashiers.html')
+
+# Once a form is submitted, the corresponding function will get called and will return a new html page to the user interface. Each passes in the form input. 
+
+# the cashier form is submitted, then this function will get called which renders the cashier_results.html template, and passes in the inputs
+@webapp.route('/cashier_results', methods=['GET', 'POST'])
+def cashier_results():
+    if request.method == 'GET':
+        return render_template('cashier_results.html',  args=request.args)
+    elif request.method == 'POST':
+        return  render_template('cashier_results.html',  form=request.form)
+
+# the cashier form is submitted, then this function will get called which renders the  template, and passes in the arguments
+@webapp.route('/customer_results', methods=['GET', 'POST'])
+def customer_results():
+    if request.method == 'GET':
+        return render_template('customer_results.html',  args=request.args)
+    elif request.method == 'POST':
+        return  render_template('customer_results.html',  form=request.form)
+
+@webapp.route('/purchases_results', methods=['GET', 'POST'])
+def purchases_results():
+    if request.method == 'GET':
+        return render_template('purchase_results.html')
+    elif request.method == 'POST':
+        return  render_template('purchase_results.html')
+
+@webapp.route('/products_results', methods=['GET', 'POST'])
+def products_results():
+    if request.method == 'GET':
+        return render_template('products_results.html')
+    elif request.method == 'POST':
+        return  render_template('products_results.html')
+
 
 if __name__ == "__main__":
     webapp.run(debug=True)
