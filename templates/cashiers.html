@@ -1,40 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, inital-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Results</title>
-</head>
-<body>
-    <div id="cashiers">
+{% extends 'base.html' %}
+
+{% block title %}
+Products Page
+{% endblock %}
+
+{% block container %}
+    <form>
+        <div id="cashiers">
+            <div>
+                <label>First Name</label>
+                <input name="fname">
+            </div>
+            <div>
+                <label>Last Name</label>
+                <input name="lname">
+            </div>
         <div>
-            <label>First Name</label>
-            <input name="fname">
+            <label>Lane</label>
+                <input name="lane">
+            </div>
+            <div>
+                <label>Day Total</label>
+                <input name="daytotal">
+            </div>
+            <div>
+                <label >Day Worked</label>
+                <input name="dayworked">
+            </div>
+            <div>
+                <button>Submit</button>
+            </div>
         </div>
-        <div>
-            <label>Last Name</label>
-            <input name="lname">
-        </div>
-       <div>
-           <label>Lane</label>
-            <input name="lane">
-        </div>
-        <div>
-            <label>Day Total</label>
-            <input name="daytotal">
-        </div>
-        <div>
-            <label >Day Worked</label>
-            <input name="dayworked">
-        </div>
-        <div>
-            <button>Submit</button>
-        </div>
-    </div>
-    <a href="/">Back to Home</a>
+        <a href="/">Back to Home</a>
 
     </form>
-</body>
-
-</html>
+{% endblock %}
