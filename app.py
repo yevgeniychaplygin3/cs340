@@ -1,7 +1,9 @@
+from calendar import c
 from crypt import methods
+import datetime
 import MySQLdb
 import flask
-from flask import render_template, request, redirect
+from flask import render_template, request, redirect, flash
 
 
 def read_mysql_config(mysql_config_file_name: str):
@@ -57,28 +59,25 @@ def products():
 def cashiers():
     return render_template('cashiers.html')
 
+
 # Once a form is submitted, the corresponding function will get called and will return a new html page to the user interface. Each passes in the form input. 
 
 # the cashier form is submitted, then this function will get called which renders the cashier_results.html template, and passes in the inputs
-@webapp.route('/cashier_results', methods=['GET', 'POST'])
-def cashier_results():
 
-    headings = ("First Name", "Last Name", "Lane", "Day Total", "Day Worked")
-    data = request.args
-    print(data)
-    
-    if request.method == 'GET':
-        return render_template('cashiers.html',  headings=headings, data=data)
-    # elif request.method == 'POST':
-    #     return  render_template('cashier_results.html',  form=request.form)
+@webapp.route('/cashier_results/', methods=['GET', 'POST'])
+def cashier_results():
+            
+    print("\n\n", request.form,"\n\n")
+    if request.method == 'POST':
+        result = f"Customer \"{request.form['fname']} {request.form['lname']}\" was added to the database"
+    else:
+        result = ''
+    return render_template('cashiers.html', data=result)
 
 # the cashier form is submitted, then this function will get called which renders the  template, and passes in the arguments
 @webapp.route('/customer_results', methods=['GET', 'POST'])
 def customer_results():
-    if request.method == 'GET':
-        return render_template('customer_results.html',  args=request.args)
-    elif request.method == 'POST':
-        return  render_template('customer_results.html',  form=request.form)
+    return  render_template('customers.html',  form=request.form)
 
 @webapp.route('/purchases_results', methods=['GET', 'POST'])
 def purchases_results():
