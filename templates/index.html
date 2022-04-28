@@ -6,8 +6,38 @@ Home Page
 {% endblock %}
 
 {% block container %}
-    <a href="/customers">Go to Customers Page</a> <br>
-    <a href="/purchases">Go to Purchases Page</a><br>
-    <a href="/products">Go to Products Page</a><br>
-    <a href="/cashiers">Go to Cashiers Page</a><br>
+    <nav class="navbar navbar-default" id="navbar" >
+        <div class="container-fluid" id="links">
+            <div class="navbar-header" id="navbarheader" >
+                <h2>Home Page</h2>
+            </div>
+            <ul class="nav navbar-nav">
+                <li>
+                    <label for="customerlink"></label>
+                    <a href="/customers" id="customerlink">Go to Customers Page</a> 
+                </li>
+                <li>
+                    <label for="purchaselink"></label>
+                    <a href="/purchases" id="purchaselink">Go to Purchases Page</a><br>
+                </li>
+                <li>
+                    <label for="productslink"></label>
+                    <a href="/products" id="productslink">Go to Products Page</a><br>
+                </li>
+                <li>
+                    <label for="cashierslink"></label>
+                    <a href="/cashiers" id="cashierslink">Go to Cashiers Page</a><br>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div>
+        <section>
+            
+            <p>
+                Place description for each web page
+            </p>
+        </section>
+    </div>
 {% endblock %}
