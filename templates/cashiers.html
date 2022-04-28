@@ -1,37 +1,43 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Products Page
+Cashiers Page
 {% endblock %}
 
 {% block container %}
-    <form>
+    <h3 style="margin-left:15px;">Add information about a cashier</h3>
+    <form action="{{ url_for('cashier_results') }}" method="POST" style="margin-left:20px;">
         <div id="cashiers">
-            <div>
-                <label>First Name</label>
-                <input name="fname">
+            <div class="form-group">
+                <label for="fname">First Name</label>
+                <input class="" name="fname">
             </div>
-            <div>
+            <div class="form-group">
                 <label>Last Name</label>
                 <input name="lname">
             </div>
-        <div>
-            <label>Lane</label>
+            <div class="form-group">
+                <label>Lane</label>
                 <input name="lane">
             </div>
-            <div>
+            <div class="form-group">
                 <label>Day Total</label>
-                <input name="daytotal">
+                <input  name="daytotal">
             </div>
-            <div>
+            <div class="form-group">
                 <label >Day Worked</label>
-                <input name="dayworked">
+                <input  name="dayworked">
             </div>
             <div>
-                <button>Submit</button>
+                <button class="btn btn-default">Insert Data</button>
             </div>
         </div>
-        <a href="/">Back to Home</a>
-
     </form>
+
+    <p style="margin-left:20px; margin-top: 10px;">{{ data }}</p>
+
+    <a href="/" style="margin-left:20px;">Back to Home</a>
+    <br>
+    <br>
+    
 {% endblock %}
