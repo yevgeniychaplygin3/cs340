@@ -6,10 +6,10 @@ Home Page
 {% endblock %}
 
 {% block container %}
+<h2 style="margin-left: 15px;">Home Page</h2>
     <nav class="navbar navbar-default" id="navbar" >
         <div class="container-fluid" id="links">
             <div class="navbar-header" id="navbarheader" >
-                <h2>Home Page</h2>
             </div>
             <ul class="nav navbar-nav">
                 <li>
@@ -28,16 +28,30 @@ Home Page
                     <label for="cashierslink"></label>
                     <a href="/cashiers" id="cashierslink">Go to Cashiers Page</a><br>
                 </li>
+                <li>
+                    <label for="rewardslink"></label>
+                    <a href="/rewards" id="rewardslink">Go to Rewards Page</a>
+                </li>
             </ul>
         </div>
     </nav>
 
     <div>
         <section>
-            
-            <p>
-                Place description for each web page
-            </p>
+                <ul>
+                    <li>
+                        The Customer Page will allow the user to interact with the Customers table and query customer information. 
+                    </li> 
+                    <li>
+                        The Purchases Page will be able to search and add purchases made by Customers.
+                    </li>
+                    <li>
+                        The Products Page will be able to add and update any products
+                    </li>
+                    <li>
+                        The Cashiers Page will be able to add Cashiers and their daily totals to the database.
+                    </li>
+                </ul>            
         </section>
     </div>
 {% endblock %}
