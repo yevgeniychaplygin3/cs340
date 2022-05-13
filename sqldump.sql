@@ -30,7 +30,7 @@ CREATE TABLE `Cashiers` (
   `day_worked` date NOT NULL,
   `lane` int(1) DEFAULT NULL,
   PRIMARY KEY (`cashier_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,6 +39,7 @@ CREATE TABLE `Cashiers` (
 
 LOCK TABLES `Cashiers` WRITE;
 /*!40000 ALTER TABLE `Cashiers` DISABLE KEYS */;
+INSERT INTO `Cashiers` VALUES (1,'Bran','Devin',26,'2022-05-01',8),(2,'Bryce','Mould',88,'2022-05-07',5),(3,'Fulton','Bloodworth',180,'2022-05-06',1),(4,'Cardea','Rayne',127,'2022-05-04',3),(5,'Darius','Appleton',187,'2022-04-14',2);
 /*!40000 ALTER TABLE `Cashiers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -61,7 +62,7 @@ CREATE TABLE `Customers` (
   UNIQUE KEY `customer_email` (`customer_email`),
   KEY `reward_id` (`reward_id`),
   CONSTRAINT `Customers_ibfk_1` FOREIGN KEY (`reward_id`) REFERENCES `Rewards` (`reward_id`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -70,6 +71,7 @@ CREATE TABLE `Customers` (
 
 LOCK TABLES `Customers` WRITE;
 /*!40000 ALTER TABLE `Customers` DISABLE KEYS */;
+INSERT INTO `Customers` VALUES (8,1,'(570) 279-3159','AlfElder@hello.com','Alf','Elder'),(9,2,'(321) 311-0246','RoyFox@hello.com','Roy','Fox'),(10,2,'(813) 829-2654','MorganFulton@hello.com','Morgan','Fulton'),(11,1,'(335) 408-1109','NyreeRussel@hello.com','Nyree','Russel'),(12,NULL,NULL,NULL,'Anonymous ',NULL);
 /*!40000 ALTER TABLE `Customers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -87,7 +89,7 @@ CREATE TABLE `Products` (
   `stock` int(3) NOT NULL,
   `type` varchar(32) NOT NULL,
   PRIMARY KEY (`product_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -96,6 +98,7 @@ CREATE TABLE `Products` (
 
 LOCK TABLES `Products` WRITE;
 /*!40000 ALTER TABLE `Products` DISABLE KEYS */;
+INSERT INTO `Products` VALUES (1,'Potato Chips',5.79,50,'Snack'),(2,'Chicken Tenders',19.29,15,'Poultry'),(3,'Doritos',3.99,30,'Snack'),(4,'Turkey',26.99,10,'Poultry '),(5,'Chimichanga',5.99,40,'Burrito');
 /*!40000 ALTER TABLE `Products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -117,8 +120,8 @@ CREATE TABLE `Purchases` (
   KEY `customer_id` (`customer_id`),
   KEY `product_id` (`cashier_id`),
   CONSTRAINT `Purchases_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `Customers` (`customer_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `Purchases_ibfk_2` FOREIGN KEY (`cashier_id`) REFERENCES `Products` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  CONSTRAINT `Purchases_ibfk_2` FOREIGN KEY (`cashier_id`) REFERENCES `Cashiers` (`cashier_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -127,6 +130,7 @@ CREATE TABLE `Purchases` (
 
 LOCK TABLES `Purchases` WRITE;
 /*!40000 ALTER TABLE `Purchases` DISABLE KEYS */;
+INSERT INTO `Purchases` VALUES (1,'2022-05-13 09:22:16',9,1,15.00,1),(2,'2022-05-04 11:23:26',8,2,19.29,1),(3,'2022-05-07 09:25:26',8,3,26.99,1),(4,'2022-05-01 09:23:25',11,3,50.00,0);
 /*!40000 ALTER TABLE `Purchases` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -140,7 +144,11 @@ DROP TABLE IF EXISTS `Purchases_Products`;
 CREATE TABLE `Purchases_Products` (
   `purchase_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
-  PRIMARY KEY (`purchase_id`,`product_id`)
+  `quantity` int(3) DEFAULT NULL,
+  PRIMARY KEY (`purchase_id`,`product_id`),
+  KEY `product_id` (`product_id`),
+  CONSTRAINT `Purchases_Products_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `Products` (`product_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  CONSTRAINT `Purchases_Products_ibfk_2` FOREIGN KEY (`purchase_id`) REFERENCES `Purchases` (`purchase_id`) ON DELETE NO ACTION ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -150,6 +158,7 @@ CREATE TABLE `Purchases_Products` (
 
 LOCK TABLES `Purchases_Products` WRITE;
 /*!40000 ALTER TABLE `Purchases_Products` DISABLE KEYS */;
+INSERT INTO `Purchases_Products` VALUES (1,2,5),(2,5,5),(3,3,1),(4,4,1);
 /*!40000 ALTER TABLE `Purchases_Products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -165,7 +174,7 @@ CREATE TABLE `Rewards` (
   `reward_points` int(6) NOT NULL,
   `reward_discount` int(6) DEFAULT NULL,
   PRIMARY KEY (`reward_id`,`reward_points`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -174,6 +183,7 @@ CREATE TABLE `Rewards` (
 
 LOCK TABLES `Rewards` WRITE;
 /*!40000 ALTER TABLE `Rewards` DISABLE KEYS */;
+INSERT INTO `Rewards` VALUES (1,100,10),(2,10,1),(3,200,20);
 /*!40000 ALTER TABLE `Rewards` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -186,4 +196,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-12 16:23:38
+-- Dump completed on 2022-05-12 17:52:09

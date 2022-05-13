@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Customers Page
+{% endblock %}
+
+{% block container %}
+    <h3 style="margin-left:15px;">Insert or update information about a customer</h3>
+
+    <form action="{{ url_for('customer_results') }}" method="POST" style="margin-left:20px;">
+        <div id="customers">
+            <div class="form-group">
+                <label>First Name</label>
+                <input name="fname">
+            </div>
+            <div class="form-group">
+                <label>Last Name</label>
+                <input name="lname">
+            </div>
+            <div class="form-group">
+                <label>Phone</label>
+                <input name="phone">
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input name="email">
+            </div>
+            <div class="form-group">
+                <label>Reward ID</label>
+                <input type="number">
+                <label for="">NULL</label>
+                <input type="checkbox">
+            </div>
+            <div>
+                <!-- <button class="btn btn-deault">Search</button> -->
+                <button type="submit" class="btn btn-deault">Insert Customer Info</button>
+                <button type="submit" class="btn btn-deault">Update Customer Info</button>
+            </div>
+        </div>
+        <br>
+    </form>
+    <form action="" style="margin-left:20px;">
+        <h3>Search customer information</h3>
+        <div>
+            <div class="form-group">
+                <label>First Name</label>
+                <input name="fname">
+            </div>
+            <div class="form-group">
+                <label>Last Name</label>
+                <input name="lname">
+            </div>
+            <button class="btn btn-deault">Search</button>
+        </div>
+    </form>
+    <br>
+    <a href="/" style="margin-left:20px;">Back to Home</a>
+{% endblock %}

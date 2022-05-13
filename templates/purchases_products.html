@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+Purchases_Products Page
+{% endblock %}
+
+{% block container %}
+    <h3 style="margin-left:15px;">Insert or Search Purchases and Products</h3>
+    <form action="" style="margin-left:15px;">
+        <div id="">
+            <div class="form-group">
+                <label for="">Customer ID</label>
+                <input type="text">
+            </div>
+            <div class="form-group">
+                <label for="">Product</label>
+                <input type="text">
+            </div>
+            <div class="form-group">
+                <label>Quantity</label>
+                <input name="options">
+            </div>
+                <button>Insert</button>
+            </div>
+        </div>
+    </form>
+    <br>
+    <a href="/" style="margin-left:15px;">Back to Home</a>
+
+{% endblock %}
