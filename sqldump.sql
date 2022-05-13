@@ -111,7 +111,7 @@ DROP TABLE IF EXISTS `Purchases`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Purchases` (
   `purchase_id` int(11) NOT NULL AUTO_INCREMENT,
-  `date` datetime NOT NULL,
+  `purchase_date` datetime NOT NULL,
   `customer_id` int(11) NOT NULL,
   `cashier_id` int(11) NOT NULL,
   `total_price` decimal(6,2) NOT NULL,
