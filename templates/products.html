@@ -30,5 +30,29 @@ Products Page
         </div>
     </div>
     <a href="/">Back to Home</a>
+
+    <h3>Current products</h3>
+<table border='1'>
+    <thead>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Stock</th>
+        <th>Type</th>
+    </thead>
+    <tbody>
+      {% for r in rows %}
+      <tr>
+        <td> {{ r[4] }}</td>
+        <td> {{ r.0 }}</td>
+        <td> {{ r[1] }}</td>
+        <td> {{ r[2] }}</td>
+        <td> {{ r[3] }}</td>
+        <td> <input type='button' name='Update' value='Update'> </td>
+        <td> <input type='button' name='Delete' value='Delete' > </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+</table>
     </form>
 {% endblock %}

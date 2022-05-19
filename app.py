@@ -6,6 +6,7 @@ import MySQLdb
 import flask
 from flask import render_template, request, redirect, flash
 import configparser
+from db_connector import connect_to_database, execute_query
 
 # def read_mysql_config(mysql_config_file_name: str):
 #     with open(mysql_config_file_name, "r") as mysql_conf:
@@ -46,7 +47,7 @@ webapp = flask.Flask(__name__, static_url_path='/static')
 #     return res_html
 # ##get_tables = webapp.route('/')(get_tables)
 
-# Home 
+# Home
 @webapp.route('/')
 def index():
     return render_template('index.html')
@@ -61,10 +62,18 @@ def Purchases():
 
 @webapp.route('/products/')
 def products():
+#    print("fetching and rendering product page")
+    db_connection = connect_to_database()
+#    query = "SELECT * from Products;"
+#    result = execute_query(db_connection, query).fetchall();
+#    print(result)
+#    return render_template('products.html', rows=result)
+#def products():
     return render_template('products.html')
 
 @webapp.route('/cashiers/')
 def cashiers():
+    return "Hello World!"
     return render_template('cashiers.html')
 
 @webapp.route('/rewards/')
@@ -76,7 +85,7 @@ def purchases_products():
     return render_template('purchases_products.html')
 
 
-# Once a form is submitted, the corresponding function will get called and will return a new html page to the user interface. Each passes in the form input. 
+# Once a form is submitted, the corresponding function will get called and will return a new html page to the user interface. Each passes in the form input.
 # the cashier form is submitted, then this function will get called which renders the cashier_results.html template, and passes in the inputs
 
 
@@ -102,6 +111,9 @@ def purchase_products_results():
     return render_template('/index.html')
 
 
+
+
+
+
 if __name__ == "__main__":
     webapp.run(debug=True,)
-    
