@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Purchases Page
+{% endblock %}
+
+{% block container %}
+    <h3 style="margin-left:15px;">Add information about a purchase</h3>
+    <form action="{{ url_for('purchases_results') }}" METHOD="POST" style="margin-left:20px">
+    <div id="purchases">
+        <div class="form-group">
+            <label>Product ID</label>
+            <input name="productid">
+        </div>
+        <div class="form-group">
+            <label>Product Price</label>
+            <input name="productprice", type="number">
+        </div>
+        <div class="form-group">
+            <label>Total Price</label>
+            <input name="totalprice", type="number">
+        </div>
+        <div class="form-group">
+            <label>Purchase Complete</label>
+            <input name="purchasecomplete", type="checkbox">
+        </div>
+        <div>
+            <button>Search</button>
+            <button>Insert Purchase Data</button>
+        </div>
+    </div>
+    <a href="/">Back to Home</a>
+
+    </form>
+{% endblock %}

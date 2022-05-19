@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Cashiers Page
+{% endblock %}
+
+{% block container %}
+<div id="cashiers">
+    <h3 style="margin-left:15px;">Add information about a cashier</h3>
+    <form action="{{ url_for('cashier_results') }}" method="POST" style="margin-left:20px;">
+            <div class="form-group">
+                <label for="fname">First Name</label>
+                <input class="" name="fname">
+            </div>
+            <div class="form-group">
+                <label>Last Name</label>
+                <input name="lname">
+            </div>
+            <div class="form-group">
+                <label>Lane</label>
+                <input name="lane">
+            </div>
+            <div class="form-group">
+                <label>Day Total</label>
+                <input  name="daytotal">
+            </div>
+            <div class="form-group">
+                <label >Day Worked</label>
+                <input  name="dayworked" type="date">
+            </div>
+            <div>
+                <button class="btn btn-default">Insert Data</button>
+            </div>
+            <p style="margin-left:20px; margin-top: 10px;">{{ data }}</p>
+    </form>
+
+    <h3 style="margin-left:15px;">Search Cashier</h3>
+    <form action="{{ url_for('cashier_results') }}" method="GET" style="margin-left:20px;">
+        <div id="cashiers">
+            <div class="form-group">
+                <label for="fname">First Name</label>
+                <input class="" name="fname">
+            </div>
+            <div class="form-group">
+                <label>Last Name</label>
+                <input name="lname">
+            </div>
+            <div class="form-group">
+                <label>Lane</label>
+                <input name="lane">
+            </div>
+            <div class="form-group">
+                <label>Day Total</label>
+                <input name="daytotal" >
+            </div>
+            <div class="form-group">
+                <label>Day Worked</label>
+                <input  name="dayworked" type="date">
+            </div>
+            <div>
+                <button class="btn btn-default">Search</button>
+            </div>
+        </div>
+    </form>
+</div>
+<div>
+    
+    <a href="/" style="margin-left:20px;">Back to Home</a>
+    <br>
+    <br>
+</div>
+{% endblock %}
