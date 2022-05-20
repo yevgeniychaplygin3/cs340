@@ -6,7 +6,7 @@ Rewards Page
 
 {% block container %}
 <div id="rewards" style="margin-left: 20px; margin-top: 20px;">
-    <form action=""  class="form-group">
+    <form action="{{ url_for('rewards_results')}}"  method='POST' class="form-group">
         <h4>Add a new rewards option to the data base. Insert the number of points needed and the discount amount.</h4>
         <div class="form-group">
             <label class="">Points</label>
@@ -15,7 +15,7 @@ Rewards Page
         <div class="form-group">
             <label for="selectdiscount">Discount</label>
             <select name="selectdiscount" id="discount">
-                <option value="5">1%</option>
+                <option value="1">1%</option>
                 <option value="5">5%</option>
                 <option value="10">10%</option>
                 <option value="20">20%</option>
@@ -25,13 +25,28 @@ Rewards Page
             </select>
         </div>
         <div class="form-group">
-            <button>Submit</button>
+            <button name="insertrewards">Submit</button>
         </div>
     
     <h4 class="form-group">Retreive all rewards from the database</h4>
-    <button class="form-group">Retreive current rewards</button>
+    <button name="selectall" class="form-group">Retreive current rewards</button>
     <br>
 
+    <table class="table table-hover" style="width: 75%; margin-left:15px;">
+            <thead>
+                <th>ID</th>
+                <th>Points</th>
+                <th>Discount</th>
+            </thead>
+            {% for i in rewards_info %}
+                <tr>
+                    <td>{{ i.0 }}</td>
+                    <td>{{ i[1] }}</td>
+                    <td>{{ i[2] }}</td>
+                </tr>
+            {% endfor %}
+    </table>
+    
     <a href="/">Back to Home</a>
 
     </form>
