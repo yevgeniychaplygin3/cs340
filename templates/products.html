@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Products Page
+{% endblock %}
+
+{% block container %}
+    <h3 style="margin-left:15px;">Add information about a product</h3>
+    <form action="{{ url_for('products_results') }}" METHOD="POST" style="margin-left:20px">
+    <div id="products">
+        <div class="form-group">
+            <label>Name</label>
+            <input name="productname">
+        </div>
+        <div class="form-group">
+            <label>Product Price</label>
+            <input name="productprice">
+        </div>
+        <div class="form-group">
+            <label>Stock</label>
+            <input name="stock">
+        </div>
+        <div class="form-group">
+            <label>Type</label>
+            <input name="type">
+        </div>
+        <div>
+            <button name="button1">Search</button>
+            <button name="button2">Insert Product Information</button>
+        </div>
+    </div>
+    <a href="/">Back to Home</a>
+
+<<<<<<< HEAD
+    <table border='1'>
+=======
+    <h3>Current products</h3>
+<table border='1'>
+>>>>>>> 755e52965a34e3511b529a7a6f93da6a2f2af7bc
+    <thead>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Stock</th>
+        <th>Type</th>
+    </thead>
+    <tbody>
+      {% for r in rows %}
+      <tr>
+<<<<<<< HEAD
+=======
+        <td> {{ r[4] }}</td>
+>>>>>>> 755e52965a34e3511b529a7a6f93da6a2f2af7bc
+        <td> {{ r.0 }}</td>
+        <td> {{ r[1] }}</td>
+        <td> {{ r[2] }}</td>
+        <td> {{ r[3] }}</td>
+<<<<<<< HEAD
+        <td> {{ r[4] }}</td>
+=======
+        <td> <input type='button' name='Update' value='Update'> </td>
+        <td> <input type='button' name='Delete' value='Delete' > </td>
+>>>>>>> 755e52965a34e3511b529a7a6f93da6a2f2af7bc
+      </tr>
+      {% endfor %}
+    </tbody>
+</table>
+<<<<<<< HEAD
+
+=======
+>>>>>>> 755e52965a34e3511b529a7a6f93da6a2f2af7bc
+    </form>
+{% endblock %}
