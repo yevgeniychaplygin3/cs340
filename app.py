@@ -119,7 +119,11 @@ def purchases_results():
         return render_template('/purchases.html/', rows=result)
     except:
         request.form['submitbutton']
-        cursor.execute('INSERT INTO Purchases (customer_id, purchase_id, cashier_id, total_price, purchase_complete) VALUES (%s, %s, %s, %s, %s);', (cid1, pid, cashierid, price, complete))
+      #  cursor.execute('INSERT INTO Purchases (customer_id, purchase_id, cashier_id, total_price, purchase_complete) VALUES (%s, %s, %s, %s, %s);', (cid1, pid, cashierid, price, complete))
+        try:
+            cursor.execute('INSERT INTO Purchases (customer_id, purchase_id, cashier_id, total_price, purchase_complete) VALUES (%s, %s, %s, %s, %s);', (cid1, pid, cashierid, price, complete))
+        except:
+            return render_template('purchases.html')
         result = cursor.fetchall()
         db_conn.commit()
         cursor.close()
