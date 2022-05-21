@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% block title %}
+Customers Page
+{% endblock %}
+{% block script %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+{% endblock %}
+
+{% block container %}
+    <div >
+      {% with messages = get_flashed_messages()  %}
+      {% if messages %}
+      {% for message in messages %}
+        </div>
+            <div class="alert alert-warning alert-dismissible">{{ message }}
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            </div>
+        </div>
+      {% endfor %}
+      {% endif %}
+      {% endwith %}
+   
+    <h3 style="margin-left:15px;">Insert or update information about a customer</h3>
+
+    <form action="{{ url_for('customer_results') }}" method="POST" style="margin-left:20px;">
+        <div id="customers">
+            <div class="form-group">
+                <label>First Name</label>
+                <input name="fname" required>
+            </div>
+            <div class="form-group">
+                <label>Last Name</label>
+                <input name="lname" required>
+            </div>
+            <div class="form-group">
+                <label>Phone</label>
+                <input name="phone">
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input name="email">
+            </div>
+            <div class="form-group">
+                <label>Reward ID</label>
+                <input name="reward_id" type="number">
+                <label for="">NULL</label>
+                <input name="checknull" type="checkbox">
+            </div>
+            <div>
+                <button type="submit" class="btn btn-deault" name="insertbutton">Insert Customer Info</button>
+                <button type="submit" class="btn btn-deault" name="updatebutton">Update Customer Info</button>
+            </div>
+        </div>
+        <br>
+    </form>
+    <form action="{{ url_for('customer_results')}}"  method="POST" style="margin-left:20px;">
+        <h3>Search customer information</h3>
+        <div>
+            <div class="form-group">
+                <label>First Name</label>
+                <input name="fname" required>
+            </div>
+            <div class="form-group">
+                <label>Last Name</label>
+                <input name="lname" required>
+            </div>
+            <button name="searchbutton" class="btn btn-deault">Search</button>
+        </div>
+    </form>
+    <br>
+    <a href="/" style="margin-left:20px;">Back to Home</a>
+   <p>{{ table }} </p>
+   <table class="table table-hover" style="width: 75%; margin-left:15px;">
+    <thead>
+       <th>ID</th>
+       <th>Reward ID</th>
+       <th>Phone</th>
+       <th>email</th>
+       <th>first name</th>
+       <th>last name</th>
+    </thead>
+
+    {% for i in customer_info %}
+    <tr>
+        <td>{{ i.0 }} </td>
+        <td>{{ i[1] }} </td>
+        <td>{{ i[2] }} </td>
+        <td>{{ i[3] }} </td>
+        <td>{{ i[4] }} </td> 
+        <td>{{ i[5] }} </td>
+    </tr>
+
+    {% endfor %}
+    </table>
+
+{% endblock %}
