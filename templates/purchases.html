@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Purchases Page
+{% endblock %}
+
+{% block container %}
+    <h3 style="margin-left:15px;">Add information about a purchase a customer made</h3>
+    <form action="{{ url_for('purchases_results') }}" METHOD="POST" style="margin-left:20px">
+        <div id="purchases">
+            <div class="form-group">
+                <label for="">Purchase ID:</label>
+                <input name="purchaseid">
+                <label>Customer ID:</label>
+                <input name="customerid1">
+            </div>
+
+            <div class="form-group">
+                <label>Cashier ID:</label>
+                <input name="cashierid">
+                <label>Total Price:</label>
+                <input name="totalprice", type="number">
+            </div>
+            <div class="form-group">
+                <label>Purchase Complete</label>
+                <input name="purchasecomplete", type="checkbox" value="1">
+            </div>
+            <div>
+                <button name="submitbutton">Submit Purchase Data</button>
+            </div>
+            <div>
+                <br>
+                <h3>Display customer purchase</h3>
+                <label for="">Customer ID</label>
+                <input type="text" name="customerid2">
+                <button name="displaybutton">Display</button>
+            </div>
+            <table border='1'>
+                <thead>
+                    <th>Customer ID</th>
+                    <th>Cashier ID</th>
+                    <th>Purchase ID</th>
+                    <th>Purchase Date</th>
+                    <th>Total Price</th>
+                    <th>Purchase Complete</th>
+                </thead>
+                <tbody>
+                    {% for r in rows %}
+                    <tr>
+                        <td> {{ r[2] }}</td>
+                        <td> {{ r[3] }}</td>
+                        <td> {{ r.0 }}</td>
+                        <td> {{ r[1] }}</td>
+                        <td> {{ r[4] }}</td>
+                        <td> {{ r[5] }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <div>
+                <br>
+                <h3>Delete customer purchase information</h3>
+                <label for="">Customer ID</label>
+                <input type="text">
+                <button>Delete</button>
+            </div>
+        </div>
+        <a href="/">Back to Home</a>
+    </form>
+{% endblock %}
