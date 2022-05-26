@@ -20,7 +20,7 @@ db_conn = MySQLdb.connect(config_info['host'],
 
 webapp = flask.Flask(__name__, static_url_path='/static')
 
-# Home 
+# Home
 @webapp.route('/')
 def index():
     return render_template('index.html')
@@ -64,7 +64,7 @@ def customer_results():
                                                 customer_email,\
                                                 reward_id) \
                                                 VALUES (%s,%s,%s,%s, %s);"
-        # call the insert_customers function in the execute.py file to get the text entered from the website                                         
+        # call the insert_customers function in the execute.py file to get the text entered from the website
         userdata = insert_customers()
 
         # try the query, if something goes wrong, flash a message
@@ -74,7 +74,7 @@ def customer_results():
             print("something went wrong")
             flash('invalid insert info', 'warning')
             return  render_template('customers.html')
-            
+
         flash('Customer Inserted')
         return  render_template('customers.html',  customer_info=result)
 
@@ -100,20 +100,20 @@ def customer_results():
     # if search button is pressed,
     elif "searchbutton" in request.form:
         searchquery = "SELECT * FROM Customers where first_name = %s and last_name = %s;"
-        first_name = request.form['fname'] 
-        last_name = request.form['lname'] 
+        first_name = request.form['fname']
+        last_name = request.form['lname']
         data = (first_name, last_name)
         result = execute_query(db_conn, searchquery, data)
         return render_template('customers.html', customer_info=result)
 
     return  render_template('customers.html')
-           
+
 
 @webapp.route('/cashier_results/', methods=['GET', 'POST'])
 def cashier_results():
     cursor = db_conn.cursor()
-    result = '' 
-    
+    result = ''
+
     if "insertbutton" in request.form:
         insertquery = "INSERT INTO Cashiers (first_name, \
                                                 last_name,\
@@ -122,7 +122,7 @@ def cashier_results():
                                                 lane) \
                                                 VALUES (%s,%s,%s,%s, %s);"
         cashiersdata = insert_cashier()
-        try: 
+        try:
             result = execute_query(db_conn, insertquery, cashiersdata)
         except:
             print("something went wrong")
@@ -134,14 +134,14 @@ def cashier_results():
 
     if "searchbutton" in request.form:
         searchquery = "SELECT * FROM Cashiers where (first_name = %s and last_name = %s) or day_worked = %s;"
-        first_name = request.form['fname'] 
-        last_name = request.form['lname'] 
+        first_name = request.form['fname']
+        last_name = request.form['lname']
         day_worked = request.form['dayworked']
         data = (first_name, last_name, day_worked)
         result = execute_query(db_conn, searchquery, data)
         return  render_template('cashiers.html',  cashier_info=result)
 
-        
+
     return render_template('cashiers.html')
 
 @webapp.route('/rewards_results', methods=['POST'])
@@ -169,22 +169,19 @@ def purchases_results():
     cid1 = request.form['customerid1']
     cid2 = request.form['customerid2']
     pid = request.form['purchaseid']
+    pid2 = request.form['purchaseid2']
     cashierid = request.form['cashierid']
     if request.form.get('purchasecomplete'):
         complete = 1
     else:
         complete = 0
     price = request.form['totalprice']
-    try:
-        request.form['displaybutton']
+    if (request.form.get('displaybutton') == ''):
         cursor.execute('SELECT * FROM Purchases WHERE customer_id = %s;', (cid2,))
-    #    cursor.execute('select * from Purchases;', ())
         result = cursor.fetchall()
         cursor.close()
         return render_template('/purchases.html/', rows=result)
-    except:
-        request.form['submitbutton']
-      #  cursor.execute('INSERT INTO Purchases (customer_id, purchase_id, cashier_id, total_price, purchase_complete) VALUES (%s, %s, %s, %s, %s);', (cid1, pid, cashierid, price, complete))
+    elif (request.form.get('submitbutton') == ''):
         try:
             cursor.execute('INSERT INTO Purchases (customer_id, purchase_id, cashier_id, total_price, purchase_complete) VALUES (%s, %s, %s, %s, %s);', (cid1, pid, cashierid, price, complete))
         except:
@@ -193,6 +190,15 @@ def purchases_results():
         db_conn.commit()
         cursor.close()
         return render_template('/purchases.html/', rows=result)
+    elif (request.form.get('deletebutton') == ''):
+        cursor.execute('DELETE FROM Purchases WHERE purchase_id = %s;', (pid2,))
+        result = cursor.fetchall()
+        db_conn.commit()
+        cursor.close()
+        return render_template('/purchases.html/', rows=result)
+
+
+
 
 @webapp.route('/products_results', methods=['GET', 'POST'])
 def products_results():
@@ -219,4 +225,3 @@ def products_results():
 if __name__ == "__main__":
     webapp.secret_key = "mysecretkey123"
     webapp.run(debug=True)
-    
