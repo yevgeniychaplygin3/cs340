@@ -35,6 +35,7 @@ Cashiers Page
             </div>
             <p style="margin-left:20px; margin-top: 10px;">{{ data }}</p>
     </form>
+    <p style="margin-left:15px;">{{ cashier_insert }}</p>
 
     <h3 style="margin-left:15px;">Search Cashier</h3>
     <form action="{{ url_for('cashier_results') }}" method='POST' style="margin-left:20px;">
@@ -75,13 +76,6 @@ Cashiers Page
 
                 {% endfor %}
             </table>
-
-            <div>
-                <h3>Delete a Cashier</h3>
-                <label for="">Cashier ID</label>
-                <input type="text">
-                <button>Delete</button>
-            </div>
         </div>
     </form>
     

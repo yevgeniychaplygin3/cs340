@@ -1,35 +1,42 @@
 {% extends 'base.html' %}
-
 {% block title %}
 Products Page
 {% endblock %}
-
 {% block container %}
     <h3 style="margin-left:15px;">Add information about a product</h3>
     <form action="{{ url_for('products_results') }}" METHOD="POST" style="margin-left:20px">
     <div id="products">
         <div class="form-group">
             <label>Name</label>
-            <input name="productname">
+            <input name="productname1" required>
         </div>
         <div class="form-group">
             <label>Product Price</label>
-            <input name="productprice">
+            <input name="productprice" required>
         </div>
         <div class="form-group">
             <label>Stock</label>
-            <input name="stock">
+            <input name="stock" required>
         </div>
         <div class="form-group">
             <label>Type</label>
-            <input name="type">
+            <input name="type" required>
         </div>
         <div>
-            <button name="button1">Search</button>
             <button name="button2">Insert Product Information</button>
         </div>
     </div>
+    <br>
     <a href="/">Back to Home</a>
+    </form>
+    
+    <form action="{{ url_for('products_results') }}" METHOD="POST" style="margin-left:20px">
+    <br>
+    <br>
+    <h3>Search a Product</h3>
+    <label>Name</label>
+    <input name="productname2" required>
+    <button name="button1">Search</button>
 
     <h3>Current products</h3>
     <table border='1'>
@@ -43,7 +50,7 @@ Products Page
         <tbody>
             {% for r in rows %}
             <tr>
-                <td> {{ r[4] }}</td>
+                <!-- <td> {{ r[4] }}</td> -->
                 <td> {{ r.0 }}</td>
                 <td> {{ r[1] }}</td>
                 <td> {{ r[2] }}</td>
