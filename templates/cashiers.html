@@ -1,35 +1,37 @@
 {% extends 'base.html' %}
-
 {% block title %}
 Cashiers Page
 {% endblock %}
-
 {% block container %}
 <div id="cashiers">
-    <h3 style="margin-left:15px;">Add information about a cashier</h3>
     <form action="{{ url_for('cashier_results') }}" method='POST' style="margin-left:20px;">
-            <div class="form-group">
+        <h3>Add information about a cashier</h3>
+            <div>
                 <label for="fname">First Name</label>
                 <input class="" name="fname">
             </div>
-            <div class="form-group">
+            <div>
                 <label>Last Name</label>
                 <input name="lname">
             </div>
-           <div class="form-group">
+           <div>
                 <label>Day Total</label>
                 <input  name="daytotal">
             </div> 
-            <div class="form-group">
+            <div>
                 <label >Day Worked</label>
                 <input  name="dayworked" type="date">
             </div>
-            <div class="form-group">
+            <div>
                 <label>Lane</label>
-                <input name="lane">
+                <input type="hidden" name=""  name="" list="selectlane" id="">
+                <select name="selectlane" id="selectlane">
+                    <option value=""></option>
+                    {% for i in range(1,15) %}
+                    <option value="{{i}}">{{i}}</option>
+                    {% endfor %}
+                </select>
             </div>
-            
-            
             <div>
                 <button type="submit" name="insertbutton" class="btn btn-default">Insert Data</button>
             </div>
@@ -37,24 +39,26 @@ Cashiers Page
     </form>
     <p style="margin-left:15px;">{{ cashier_insert }}</p>
 
-    <h3 style="margin-left:15px;">Search Cashier</h3>
     <form action="{{ url_for('cashier_results') }}" method='POST' style="margin-left:20px;">
+        <h3>Search Cashier</h3>
         <div id="cashiers">
-            <div class="form-group">
+            <div>
                 <label for="fname">First Name</label>
                 <input class="" name="fname">
             </div>
-            <div class="form-group">
+            <div>
                 <label>Last Name</label>
                 <input name="lname">
             </div>
-            <div class="form-group">
+            <div>
                 <label>Day Worked</label>
                 <input name="dayworked" type="date">
             <div>
                 <button name="searchbutton" type="submit" class="btn btn-default">Search</button>
+                <button name="showall" type="submit">Show all</button>
             </div>
-            <table class="table table-hover" style="width: 75%; margin-left:15px;">
+            <br>
+            <table style="width: 75%;">
                 <thead>
                    <th>ID</th>
                    <th>first name</th>
@@ -80,10 +84,6 @@ Cashiers Page
     </form>
     
 </div>
-<div>
-    
-    <a href="/" style="margin-left:20px;">Back to Home</a>
-    <br>
-    <br>
-</div>
+<br>
+<a id="backtohome" href="/" style="margin-left:20px;">Back to Home</a>
 {% endblock %}
