@@ -6,8 +6,8 @@ Rewards Page
 
 {% block container %}
 <div id="rewards" style="margin-left: 20px; margin-top: 20px;">
-    <form action="{{ url_for('rewards_results')}}"  method='POST' class="form-group">
-        <h4>Add a new rewards option to the data base. Insert the number of points needed and the discount amount.</h4>
+<form action="{{ url_for('rewards_results')}}"  method='POST' class="form-group">
+        <h3>Add a new rewards option to the data base. Insert the number of points needed and the discount amount.</h3>
         <div class="form-group">
             <label class="">Points</label>
             <input name="rewardpoints">
@@ -28,15 +28,14 @@ Rewards Page
             <button name="insertrewards">Submit</button>
         </div>
     
-    <h4 class="form-group">Retreive all rewards from the database</h4>
-    <button name="selectall" class="form-group">Retreive current rewards</button>
+    <!-- <h4 class="form-group">Retreive all rewards from the database</h4> -->
+    <!-- <button name="selectall" class="form-group">Retreive current rewards</button> -->
     <br>
-
-    <table class="table table-hover" style="width: 75%; margin-left:15px;">
+    <table>
             <thead>
                 <th>ID</th>
                 <th>Points</th>
-                <th>Discount</th>
+                <th>Discount (%)</th>
             </thead>
             {% for i in rewards_info %}
                 <tr>
@@ -48,14 +47,12 @@ Rewards Page
     </table>
     <br><br>
     <h3>Delete an reward option</h3>
-    <label for="deletereward"></label>
+    <label for="deletereward">Enter ID</label>
     <input type="text" name="deletereward" id="deletereward1">
     <button name="deletebutton">Delete Reward</button>
     <p>{{ delete_status }}</p>
-    <br>
-    <br>
-    <a href="/">Back to Home</a>
-
-    </form>
+    
+</form>
 </div>
+<span id="backtohome"><a  href="/">Back to Home</a></span>
 {% endblock %}
