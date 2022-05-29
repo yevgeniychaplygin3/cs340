@@ -3,48 +3,36 @@
 Customers Page
 {% endblock %}
 {% block script %}
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 {% endblock %}
 
 {% block container %}
-    <div >
-      {% with messages = get_flashed_messages()  %}
-      {% if messages %}
-      {% for message in messages %}
-        </div>
-            <div class="alert alert-warning alert-dismissible">{{ message }}
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            </div>
-        </div>
-      {% endfor %}
-      {% endif %}
-      {% endwith %}
-   
-    <h3 style="margin-left:15px;">Insert or update information about a customer</h3>
-
-    <form action="{{ url_for('customer_results') }}" method="POST" style="margin-left:20px;">
-        <div id="customers">
-            <div class="form-group">
+      <form action="{{ url_for('customer_results') }}" method="POST" style="margin-left:20px;">
+        <h3>Insert or update information about a customer</h3>
+            <div>
                 <label>First Name</label>
                 <input name="fname" required>
             </div>
-            <div class="form-group">
+            <div>
                 <label>Last Name</label>
                 <input name="lname" required>
             </div>
-            <div class="form-group">
+            <div>
                 <label>Phone</label>
                 <input name="phone">
             </div>
-            <div class="form-group">
+            <div>
                 <label>Email</label>
                 <input name="email">
             </div>
-            <div class="form-group">
+            <div>
                 <label>Reward ID</label>
-                <input name="reward_id" type="number">
+                <input type="hidden"  name="" list="select1" id="">
+                <select name="reward_id" id="select1">
+                    <option value=""></option>
+                    {% for i in reward_options %}
+                    <option value={{i}}>{{i}}</option>
+                    {% endfor %}
+                </select>
                 <label for="">NULL</label>
                 <input name="checknull" type="checkbox">
             </div>
@@ -52,39 +40,34 @@ Customers Page
                 <button type="submit" class="btn btn-deault" name="insertbutton">Insert Customer Info</button>
                 <button type="submit" class="btn btn-deault" name="updatebutton">Update Customer Info</button>
             </div>
-        </div>
-        <br>
     </form>
     <p style="margin-left:15px;">{{ customer_results }}</p>
-    <table>
-
-    </table>
+    <p style="margin-left:15px;">{{ customer_results_error }}</p>
 
     <form action="{{ url_for('customer_results')}}"  method="POST" style="margin-left:20px;">
         <h3>Search customer information</h3>
         <div>
             <div class="form-group">
                 <label>First Name</label>
-                <input name="fname" required>
+                <input name="fname">
             </div>
             <div class="form-group">
                 <label>Last Name</label>
-                <input name="lname" required>
+                <input name="lname" >
             </div>
             <button name="searchbutton" class="btn btn-deault">Search</button>
+            <button name="" class="btn btn-deault">Show all</button>
         </div>
-    </form>
     <br>
-    <a href="/" style="margin-left:20px;">Back to Home</a>
-   <p>{{ table }} </p>
-   <table class="table table-hover" style="width: 75%; margin-left:15px;">
+   <!-- <p>{{ table }} </p> -->
+   <table >
     <thead>
        <th>ID</th>
        <th>Reward ID</th>
        <th>Phone</th>
-       <th>email</th>
-       <th>first name</th>
-       <th>last name</th>
+       <th>Email</th>
+       <th>First Name</th>
+       <th>Last Name</th>
     </thead>
 
     {% for i in customer_info %}
@@ -96,8 +79,7 @@ Customers Page
         <td>{{ i[4] }} </td> 
         <td>{{ i[5] }} </td>
     </tr>
-
     {% endfor %}
-    </table>
-
+    </table></form>
+<a id="backtohome" href="/" style="margin-left:20px;">Back to Home</a>
 {% endblock %}
