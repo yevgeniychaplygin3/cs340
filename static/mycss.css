@@ -1,0 +1,139 @@
+body {
+    padding-left:	5%;
+    padding-right:	5%;
+    font-family:	Verdana, Arial, Helvetica, serif;
+    font-size:		85%;
+    text-align:		left;
+    vertical-align:	top;
+    background:		#f4f4f4;
+}
+.form-group, a{
+    padding: 3px;
+}
+h1, h2, table, nav, .menu, .footer {
+    border:			1px solid #000000;
+    padding:		3px;
+    background:		#ddeeff;
+
+}
+
+p {
+    padding:		3px;
+}
+
+table {
+    width:			60%;
+    font-family:	Verdana, Arial, Helvetica, serif;
+    font-size:		90%;
+    text-align:		left;
+    vertical-align:	top;
+    margin: 5px 5px 5px 0px;
+}
+
+img {
+    border:			0;
+}
+
+#meta {
+    width:			100%;
+    clear:			both;
+}
+
+#meta .button {
+    margin:			0 5px 0 0;
+}
+
+td {
+    padding:		0 2px 0 2px;
+    vertical-align:	top;
+    width: 5px;
+}
+
+
+td.name {
+    background:		#ffffff;
+    border:			1px solid #000000;
+}
+
+td.type {
+    background:		#ffffff;
+    border:			1px solid #000000;
+}
+
+td.count {
+    background:		#ffffff;
+    border:			1px solid #000000;
+}
+
+td.owner {
+    background:		#ffffff;
+    border:			1px solid #000000;
+}
+
+td.cell {
+    background:		#ffffff;
+    border:			1px solid #000000;
+}
+
+#backtohome{
+    position: fixed;
+    top:  90%;
+    right: 0;
+    margin: 20px;
+    
+}
+a:link { 
+    color:			#000000;
+}
+
+a:visited { 
+    color:			#000000;
+}
+
+a:active { 
+    color:			#000000;
+}
+
+a:hover	{
+    text-decoration:	none;
+}
+
+.footer	{
+    font-size:		70%;
+    margin-top:		5px;
+}
+
+.sbutton {
+    border:			#999999 1px solid;
+}
+
+.btn, .btn-deault {
+    border:			#999999 1px solid;
+    margin-top:     4px;
+}
+.input {
+    border:			#999999 1px solid;
+}
+.sinput {
+    border: 		#999999 1px solid;
+}
+
+textarea {
+    width:			100%;
+}
+
+input.wide {
+    width:			100%;
+}
+
+.letternotavailable { 
+    color:			#CCCCCC;
+}
+
+td.checkbox {
+    width:			5px;
+}
+
+.normaltext {
+    font-size:		80%;
+}
