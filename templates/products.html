@@ -3,8 +3,8 @@
 Products Page
 {% endblock %}
 {% block container %}
-    <h3 style="margin-left:15px;">Add information about a product</h3>
-    <form action="{{ url_for('products_results') }}" METHOD="POST" style="margin-left:20px">
+<form action="{{ url_for('products_results') }}" METHOD="POST" style="margin-left:20px">
+    <h3>Add information about a product</h3>
     <div id="products">
         <div class="form-group">
             <label>Name</label>
@@ -23,21 +23,28 @@ Products Page
             <input name="type" required>
         </div>
         <div>
-            <button name="button2">Insert Product Information</button>
+            <button name="insertbutton">Insert Product Information</button>
         </div>
     </div>
     <br>
-    <a href="/">Back to Home</a>
+    
     </form>
     
     <form action="{{ url_for('products_results') }}" METHOD="POST" style="margin-left:20px">
     <br>
     <br>
+    
+    <br>
+    <h3>Delete a Product</h3>
+    <label for="deleteproduct">ID</label>
+    <input name="deleteproduct">
+    <button name="deletebutton">Delete</button>
+
     <h3>Search a Product</h3>
     <label>Name</label>
-    <input name="productname2" required>
-    <button name="button1">Search</button>
-
+    <input name="searchproduct">
+    <button name="searchbutton">Search</button>
+    <button name="showallbutton">Show all</button>
     <h3>Current products</h3>
     <table border='1'>
         <thead>
@@ -56,11 +63,12 @@ Products Page
                 <td> {{ r[2] }}</td>
                 <td> {{ r[3] }}</td>
                 <td> {{ r[4] }}</td>
-                <td> <input type='button' name='Update' value='Update'> </td>
-                <td> <input type='button' name='Delete' value='Delete' > </td>
+                <!-- <td> <input type='button' name='Update' value='Update'> </td> -->
+                <!-- <td> <input type='button' name='Delete' value='Delete' > </td> -->
             </tr>
         {% endfor %}
         </tbody>
     </table>
     </form>
+    <a id="backtohome" href="/">Back to Home</a>
 {% endblock %}
