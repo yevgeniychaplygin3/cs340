@@ -1,199 +1,370 @@
--- MariaDB dump 10.19  Distrib 10.4.24-MariaDB, for Linux (x86_64)
+-- phpMyAdmin SQL Dump
+-- version 5.1.3-2.el7.remi
+-- https://www.phpmyadmin.net/
 --
--- Host: classmysql.engr.oregonstate.edu    Database: cs340_chaplygy
--- ------------------------------------------------------
--- Server version	10.6.7-MariaDB-log
+-- Host: localhost
+-- Generation Time: May 31, 2022 at 10:33 PM
+-- Server version: 10.6.7-MariaDB-log
+-- PHP Version: 7.4.28
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Database: `cs340_chaplygy`
+--
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `Cashiers`
 --
+-- Creation: May 12, 2022 at 11:24 PM
+-- Last update: May 31, 2022 at 09:36 PM
+--
 
 DROP TABLE IF EXISTS `Cashiers`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Cashiers` (
-  `cashier_id` int(11) NOT NULL AUTO_INCREMENT,
+  `cashier_id` int(11) NOT NULL,
   `first_name` varchar(64) NOT NULL,
   `last_name` varchar(64) NOT NULL,
   `day_total` int(4) NOT NULL,
   `day_worked` date NOT NULL,
-  `lane` int(1) DEFAULT NULL,
-  PRIMARY KEY (`cashier_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `lane` int(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- RELATIONSHIPS FOR TABLE `Cashiers`:
+--
 
 --
 -- Dumping data for table `Cashiers`
 --
 
-LOCK TABLES `Cashiers` WRITE;
-/*!40000 ALTER TABLE `Cashiers` DISABLE KEYS */;
-INSERT INTO `Cashiers` VALUES (1,'Bran','Devin',26,'2022-05-01',8),(2,'Bryce','Mould',88,'2022-05-07',5),(3,'Fulton','Bloodworth',180,'2022-05-06',1),(4,'Cardea','Rayne',127,'2022-05-04',3),(5,'Darius','Appleton',187,'2022-04-14',2);
-/*!40000 ALTER TABLE `Cashiers` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `Cashiers` (`cashier_id`, `first_name`, `last_name`, `day_total`, `day_worked`, `lane`) VALUES
+(2, 'Bryce', 'Mould', 88, '2022-05-07', 5),
+(3, 'Fulton', 'Bloodworth', 180, '2022-05-06', 1),
+(4, 'Cardea', 'Rayne', 127, '2022-05-04', 3),
+(5, 'Darius', 'Appleton', 187, '2022-04-14', 2),
+(22, 'Jim', 'Halpert', 138, '2022-05-27', 7),
+(23, 'Creed', 'Bratton', 156, '2022-05-19', 9),
+(24, 'Creed', 'Bratton', 156, '2022-05-19', 9),
+(25, 'Creed', 'Bratton', 156, '2022-05-19', 7),
+(26, 'Pam', 'Beesley', 169, '2022-05-17', 3),
+(27, 'New', 'Cashier', 200, '2022-05-29', 9),
+(28, 'TEst', 'testint', 333, '2022-05-29', 3),
+(29, 'doritos', 'nacho', 12, '0001-01-01', 2),
+(30, 'doritos', 'ranch', 12, '2222-02-02', 2),
+(31, 'cash', 'ier', 200, '2022-05-31', 14);
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `Customers`
 --
+-- Creation: May 31, 2022 at 09:25 PM
+-- Last update: May 31, 2022 at 09:26 PM
+--
 
 DROP TABLE IF EXISTS `Customers`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Customers` (
-  `customer_id` int(11) NOT NULL AUTO_INCREMENT,
+  `customer_id` int(11) NOT NULL,
   `reward_id` int(11) DEFAULT NULL,
   `customer_phone` varchar(16) DEFAULT NULL,
   `customer_email` varchar(328) DEFAULT NULL,
   `first_name` varchar(64) NOT NULL DEFAULT 'Anonymous ',
-  `last_name` varchar(64) DEFAULT NULL,
-  PRIMARY KEY (`customer_id`),
-  UNIQUE KEY `customer_phone` (`customer_phone`),
-  UNIQUE KEY `customer_email` (`customer_email`),
-  KEY `reward_id` (`reward_id`),
-  CONSTRAINT `Customers_ibfk_1` FOREIGN KEY (`reward_id`) REFERENCES `Rewards` (`reward_id`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `last_name` varchar(64) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- RELATIONSHIPS FOR TABLE `Customers`:
+--   `reward_id`
+--       `Rewards` -> `reward_id`
+--
 
 --
 -- Dumping data for table `Customers`
 --
 
-LOCK TABLES `Customers` WRITE;
-/*!40000 ALTER TABLE `Customers` DISABLE KEYS */;
-INSERT INTO `Customers` VALUES (8,1,'(570) 279-3159','AlfElder@hello.com','Alf','Elder'),(9,2,'(321) 311-0246','RoyFox@hello.com','Roy','Fox'),(10,2,'(813) 829-2654','MorganFulton@hello.com','Morgan','Fulton'),(11,1,'(335) 408-1109','NyreeRussel@hello.com','Nyree','Russel'),(12,NULL,NULL,NULL,'Anonymous ',NULL);
-/*!40000 ALTER TABLE `Customers` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `Customers` (`customer_id`, `reward_id`, `customer_phone`, `customer_email`, `first_name`, `last_name`) VALUES
+(8, 15, '(570) 279-3159', 'AlfElder@hello.com', 'Alf', 'Elder'),
+(9, 2, '(321) 311-0246', 'RoyFox@hello.com', 'Roy', 'Fox'),
+(10, 2, '(813) 829-2654', 'MorganFulton@hello.com', 'Morgan', 'Fulton'),
+(11, NULL, '(335) 408-1109', 'NyreeRussel@hello.com', 'Nyree', 'Russel'),
+(12, NULL, NULL, NULL, 'Anonymous ', NULL),
+(181, NULL, '903-999-9999', 'jim@none.com', 'jim', 'halpert'),
+(183, NULL, '3333333333', 'ABC@abc.org', 'Sample', 'sample2'),
+(186, NULL, '5554443333', 'thisemail@email.org', 'Milo', 'Asamplename'),
+(188, 3, '3423543244', 'doe@gmail.com', 'joe', 'doe'),
+(195, 2, '999-777-1234', 'ryanh@none.com', 'Ryan', 'Howard'),
+(291, 3, '541-999-9999', 'new@none.com', 'New ', 'Customer'),
+(320, 2, '12345678', 'random@email.com', 'Test', 'Testing'),
+(321, NULL, '3452498912', 'eriksonl@none.com', 'Laef', 'Erikson'),
+(322, NULL, '33333', 'email.com', 'Char', 'H'),
+(325, 2, '4321', 'email@.com', 'trhhr', 'rthrthr');
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `Products`
 --
+-- Creation: May 12, 2022 at 11:24 PM
+-- Last update: May 31, 2022 at 09:37 PM
+--
 
 DROP TABLE IF EXISTS `Products`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Products` (
-  `product_id` int(11) NOT NULL AUTO_INCREMENT,
+  `product_id` int(11) NOT NULL,
   `product_name` varchar(32) NOT NULL,
   `product_price` decimal(6,2) NOT NULL,
   `stock` int(3) NOT NULL,
-  `type` varchar(32) NOT NULL,
-  PRIMARY KEY (`product_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `type` varchar(32) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- RELATIONSHIPS FOR TABLE `Products`:
+--
 
 --
 -- Dumping data for table `Products`
 --
 
-LOCK TABLES `Products` WRITE;
-/*!40000 ALTER TABLE `Products` DISABLE KEYS */;
-INSERT INTO `Products` VALUES (1,'Potato Chips',5.79,50,'Snack'),(2,'Chicken Tenders',19.29,15,'Poultry'),(3,'Doritos',3.99,30,'Snack'),(4,'Turkey',26.99,10,'Poultry '),(5,'Chimichanga',5.99,40,'Burrito');
-/*!40000 ALTER TABLE `Products` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `Products` (`product_id`, `product_name`, `product_price`, `stock`, `type`) VALUES
+(2, 'Chicken Tenders', '19.29', 15, 'Poultry'),
+(3, 'Doritos', '3.99', 30, 'Snack'),
+(4, 'Turkey', '26.99', 10, 'Poultry '),
+(5, 'Chimichanga', '5.99', 40, 'Burrito'),
+(21, 'Mac aronie', '5.99', 50, 'Pasta'),
+(30, 'New Product', '50.00', 50, 'Test'),
+(52, 'Coffee', '3.75', 200, 'Beverage');
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `Purchases`
 --
+-- Creation: May 13, 2022 at 12:38 AM
+-- Last update: May 31, 2022 at 09:47 PM
+--
 
 DROP TABLE IF EXISTS `Purchases`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Purchases` (
-  `purchase_id` int(11) NOT NULL AUTO_INCREMENT,
+  `purchase_id` int(11) NOT NULL,
   `date` datetime NOT NULL,
   `customer_id` int(11) NOT NULL,
   `cashier_id` int(11) NOT NULL,
   `total_price` decimal(6,2) NOT NULL,
-  `purchase_complete` tinyint(1) NOT NULL,
-  PRIMARY KEY (`purchase_id`,`date`),
-  KEY `customer_id` (`customer_id`),
-  KEY `product_id` (`cashier_id`),
-  CONSTRAINT `Purchases_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `Customers` (`customer_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `Purchases_ibfk_2` FOREIGN KEY (`cashier_id`) REFERENCES `Cashiers` (`cashier_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `purchase_complete` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- RELATIONSHIPS FOR TABLE `Purchases`:
+--   `customer_id`
+--       `Customers` -> `customer_id`
+--   `cashier_id`
+--       `Cashiers` -> `cashier_id`
+--
 
 --
 -- Dumping data for table `Purchases`
 --
 
-LOCK TABLES `Purchases` WRITE;
-/*!40000 ALTER TABLE `Purchases` DISABLE KEYS */;
-INSERT INTO `Purchases` VALUES (1,'2022-05-13 09:22:16',9,1,15.00,1),(2,'2022-05-04 11:23:26',8,2,19.29,1),(3,'2022-05-07 09:25:26',8,3,26.99,1),(4,'2022-05-01 09:23:25',11,3,50.00,0);
-/*!40000 ALTER TABLE `Purchases` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `Purchases` (`purchase_id`, `date`, `customer_id`, `cashier_id`, `total_price`, `purchase_complete`) VALUES
+(77, '2022-05-29 11:53:02', 8, 4, '500.00', 0),
+(78, '2022-05-29 11:55:59', 9, 26, '123.00', 1),
+(81, '2022-05-31 12:56:50', 11, 3, '50.00', 1),
+(82, '2022-05-31 14:05:04', 181, 23, '200.00', 1);
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `Purchases_Products`
 --
+-- Creation: May 29, 2022 at 06:22 PM
+-- Last update: May 31, 2022 at 09:47 PM
+--
 
 DROP TABLE IF EXISTS `Purchases_Products`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Purchases_Products` (
   `purchase_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
-  `quantity` int(3) DEFAULT NULL,
-  PRIMARY KEY (`purchase_id`,`product_id`),
-  KEY `product_id` (`product_id`),
-  CONSTRAINT `Purchases_Products_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `Products` (`product_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  CONSTRAINT `Purchases_Products_ibfk_2` FOREIGN KEY (`purchase_id`) REFERENCES `Purchases` (`purchase_id`) ON DELETE NO ACTION ON UPDATE CASCADE
+  `quantity` int(3) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- RELATIONSHIPS FOR TABLE `Purchases_Products`:
+--   `product_id`
+--       `Products` -> `product_id`
+--   `purchase_id`
+--       `Purchases` -> `purchase_id`
+--
 
 --
 -- Dumping data for table `Purchases_Products`
 --
 
-LOCK TABLES `Purchases_Products` WRITE;
-/*!40000 ALTER TABLE `Purchases_Products` DISABLE KEYS */;
-INSERT INTO `Purchases_Products` VALUES (1,2,5),(2,5,5),(3,3,1),(4,4,1);
-/*!40000 ALTER TABLE `Purchases_Products` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `Purchases_Products` (`purchase_id`, `product_id`, `quantity`) VALUES
+(77, 3, 3),
+(77, 4, 2),
+(77, 21, 1),
+(78, 21, 3),
+(78, 30, 1),
+(81, 2, 3),
+(81, 5, 1),
+(81, 21, 2),
+(82, 2, 5),
+(82, 3, 3),
+(82, 4, 1),
+(82, 5, 2);
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `Rewards`
 --
+-- Creation: May 12, 2022 at 11:24 PM
+-- Last update: May 31, 2022 at 09:36 PM
+--
 
 DROP TABLE IF EXISTS `Rewards`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Rewards` (
-  `reward_id` int(11) NOT NULL AUTO_INCREMENT,
+  `reward_id` int(11) NOT NULL,
   `reward_points` int(6) NOT NULL,
-  `reward_discount` int(6) DEFAULT NULL,
-  PRIMARY KEY (`reward_id`,`reward_points`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `reward_discount` int(6) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- RELATIONSHIPS FOR TABLE `Rewards`:
+--
 
 --
 -- Dumping data for table `Rewards`
 --
 
-LOCK TABLES `Rewards` WRITE;
-/*!40000 ALTER TABLE `Rewards` DISABLE KEYS */;
-INSERT INTO `Rewards` VALUES (1,100,10),(2,10,1),(3,200,20);
-/*!40000 ALTER TABLE `Rewards` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+INSERT INTO `Rewards` (`reward_id`, `reward_points`, `reward_discount`) VALUES
+(2, 10, 1),
+(3, 200, 20),
+(15, 50, 5),
+(16, 15, 1),
+(18, 10, 1),
+(39, 300, 30),
+(42, 5, 5),
+(43, 100, 10);
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `Cashiers`
+--
+ALTER TABLE `Cashiers`
+  ADD PRIMARY KEY (`cashier_id`);
+
+--
+-- Indexes for table `Customers`
+--
+ALTER TABLE `Customers`
+  ADD PRIMARY KEY (`customer_id`),
+  ADD UNIQUE KEY `customer_phone` (`customer_phone`),
+  ADD UNIQUE KEY `customer_email` (`customer_email`),
+  ADD UNIQUE KEY `last_name` (`last_name`),
+  ADD UNIQUE KEY `first_name_3` (`first_name`,`last_name`) USING BTREE,
+  ADD KEY `reward_id` (`reward_id`);
+
+--
+-- Indexes for table `Products`
+--
+ALTER TABLE `Products`
+  ADD PRIMARY KEY (`product_id`);
+
+--
+-- Indexes for table `Purchases`
+--
+ALTER TABLE `Purchases`
+  ADD PRIMARY KEY (`purchase_id`,`date`),
+  ADD KEY `customer_id` (`customer_id`),
+  ADD KEY `product_id` (`cashier_id`);
+
+--
+-- Indexes for table `Purchases_Products`
+--
+ALTER TABLE `Purchases_Products`
+  ADD PRIMARY KEY (`purchase_id`,`product_id`),
+  ADD KEY `Purchases_Products_ibfk_1` (`product_id`);
+
+--
+-- Indexes for table `Rewards`
+--
+ALTER TABLE `Rewards`
+  ADD PRIMARY KEY (`reward_id`,`reward_points`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `Cashiers`
+--
+ALTER TABLE `Cashiers`
+  MODIFY `cashier_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+
+--
+-- AUTO_INCREMENT for table `Customers`
+--
+ALTER TABLE `Customers`
+  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=333;
+
+--
+-- AUTO_INCREMENT for table `Products`
+--
+ALTER TABLE `Products`
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+
+--
+-- AUTO_INCREMENT for table `Purchases`
+--
+ALTER TABLE `Purchases`
+  MODIFY `purchase_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
+
+--
+-- AUTO_INCREMENT for table `Rewards`
+--
+ALTER TABLE `Rewards`
+  MODIFY `reward_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `Customers`
+--
+ALTER TABLE `Customers`
+  ADD CONSTRAINT `Customers_ibfk_1` FOREIGN KEY (`reward_id`) REFERENCES `Rewards` (`reward_id`) ON DELETE SET NULL ON UPDATE SET NULL;
+
+--
+-- Constraints for table `Purchases`
+--
+ALTER TABLE `Purchases`
+  ADD CONSTRAINT `Purchases_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `Customers` (`customer_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Purchases_ibfk_2` FOREIGN KEY (`cashier_id`) REFERENCES `Cashiers` (`cashier_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `Purchases_Products`
+--
+ALTER TABLE `Purchases_Products`
+  ADD CONSTRAINT `Purchases_Products_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `Products` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Purchases_Products_ibfk_2` FOREIGN KEY (`purchase_id`) REFERENCES `Purchases` (`purchase_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2022-05-12 17:52:09
