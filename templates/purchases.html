@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Purchases Page
+{% endblock %}
+
+{% block container %}
+<form action="{{ url_for('purchases_results') }}" METHOD="POST" style="margin-left:20px">
+    <h3>Add information about a purchase a customer made</h3>
+        <div id="purchases"> 
+            <label>Customer List</label>
+            <select name="selectcustomer" id="selectcustomer" aria-readonly="true">
+                    <option value=""></option>
+                    {% for i in customers %}
+                    <option  value={{i}}>{{i}}</option>
+                    {% endfor %}
+            </select> 
+            <a href="{{ url_for('customers') }}">Add a Customer</a>
+            <div class="form-group">
+                <p>Type Customer's first and last name (See List above for list of Customers)</p>
+                <label>Customer:</label>
+                <input type="search" name="fname" value="first name" required>
+                <input type="search" name="lname" value="last name" required >
+            </div>
+            <div class="form-group">
+                <label>Cashier:</label>
+                <input type="hidden" name="cashierid" list="selectcashier">
+                <select name="selectcashier" id="selectcashier">
+                    <option value=""></option>
+                    {% for i in cashiers %}
+                    <option value={{i}}>{{i}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Total Price:</label>
+                <input name="totalprice", type="number">
+            </div>
+            <div class="form-group">
+                <label>Purchase Complete</label>
+                <input name="purchasecomplete", type="checkbox" value="1">
+            </div>
+            <br><br>
+            <table>
+            <div style="width: 50%;">
+                <th>Name</th>
+                <th>Bought?</th>
+                <th>Quantity</th>
+                {% for i in products -%}
+                <tr>
+                    <td>
+                        <label name="productname" for="products" >{{i}}</label>
+                    </td>
+                    <td>
+                        <input name="productsbought" type="checkbox" value={{i}}>
+                    </td>
+                    <td>
+                        <input style="width: 35px;" name="quantity" type="number" value="Quantity">
+                    </td>
+                </tr>
+                {% endfor %}
+        </div>
+            </table>
+            <div>
+                <button name="submitbutton">Submit Purchase Data</button>
+            </div>
+            <p style="margin-left:15px;">{{ purchase_error }}</p>
+            <p style="margin-left:15px;">{{ purchases_result }}</p>
+        </form>
+
+        <form action="{{ url_for('purchases_results') }}" METHOD="POST">
+            <div>
+                <br>
+                <h3>Delete customer purchase information</h3>
+                <label for="">Purchase ID</label>
+                <input type="text" name="purchaseid2">
+                <button name="deletebutton">Delete</button>
+                <p style="margin-left:15px;">{{ delete_result }}</p>
+            </div>
+            <div>
+                <br>
+                <h3>Display customer purchase</h3>
+                <label for="">Customer ID</label>
+                <input type="text" name="customerid2">
+                <button name="searchbutton">Search</button>
+                <button name="displaybutton">Display All</button>
+            </div>
+            <table>
+                <thead>
+                    <th>Purchase ID</th>
+                    <th>Purchase Date</th>
+                    <th>Customer ID</th>
+                    <th>Cashier ID</th>
+                    <th>Total Price</th>
+                    <th>Purchase Complete</th>
+                </thead>
+                <tbody>
+                    {% for r in rows %}
+                    <tr>
+                        <td> {{ r.0 }}</td>
+                        <td> {{ r[1] }}</td>
+                        <td> {{ r[2] }}</td>
+                        <td> {{ r[3] }}</td>
+                        <td> {{ r[4] }}</td>
+                        <td> 
+                            {% if r[5] == 1 %} 
+                                {{ 'yes' }} 
+                            {% else %}
+                            {{ 'No' }}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <table>
+                    {% for i in products_bought %}
+                    <tr>
+                        <td>
+                            Product Bought: ({{ i[0] }}) {{ i[1] }} for {{ i[2] }} each
+                        </td>
+                    </tr>
+                    {% endfor %}
+            </table>
+            
+        </div>
+    </form>
+    <a id="backtohome" href="/">Back to Home</a>
+{% endblock %}

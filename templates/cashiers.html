@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% block title %}
+Cashiers Page
+{% endblock %}
+{% block container %}
+<div id="cashiers">
+    <form action="{{ url_for('cashier_results') }}" method='POST' style="margin-left:20px;">
+        <h3>Add information about a cashier</h3>
+            <div>
+                <label for="fname">First Name</label>
+                <input class="" name="fname">
+            </div>
+            <div>
+                <label>Last Name</label>
+                <input name="lname">
+            </div>
+           <div>
+                <label>Day Total</label>
+                <input  name="daytotal">
+            </div> 
+            <div>
+                <label >Day Worked</label>
+                <input  name="dayworked" type="date">
+            </div>
+            <div>
+                <label>Lane</label>
+                <input type="hidden" name=""  name="" list="selectlane" id="">
+                <select name="selectlane" id="selectlane">
+                    <option value=""></option>
+                    {% for i in range(1,15) %}
+                    <option value="{{i}}">{{i}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <button type="submit" name="insertbutton" class="btn btn-default">Insert Data</button>
+            </div>
+            <p style="margin-left:20px; margin-top: 10px;">{{ data }}</p>
+    </form>
+    <p style="margin-left:15px;">{{ cashier_insert }}</p>
+
+    <form action="{{ url_for('cashier_results') }}" method='POST' style="margin-left:20px;">
+        <h3>Search Cashier</h3>
+        <div id="cashiers">
+            <div>
+                <label for="fname">First Name</label>
+                <input class="" name="fname">
+            </div>
+            <div>
+                <label>Last Name</label>
+                <input name="lname">
+            </div>
+            <div>
+                <label>Day Worked</label>
+                <input name="dayworked" type="date">
+            <div>
+                <button name="searchbutton" type="submit" class="btn btn-default">Search</button>
+                <button name="showall" type="submit">Show all</button>
+            </div>
+            <br>
+            <table style="width: 75%;">
+                <thead>
+                   <th>ID</th>
+                   <th>first name</th>
+                   <th>last name</th>
+                   <th>Day Total</th>
+                   <th>Day worked</th>
+                   <th>Lane</th>
+                </thead>
+
+                {% for i in cashier_info %}
+                    <tr>
+                        <td>{{ i.0 }} </td>
+                        <td>{{ i[1] }} </td>
+                        <td>{{ i[2] }} </td>
+                        <td>{{ i[3] }} </td>
+                        <td>{{ i[4] }} </td> 
+                        <td>{{ i[5] }} </td>
+                    </tr>
+
+                {% endfor %}
+            </table>
+        </div>
+    </form>
+    
+</div>
+<br>
+<a id="backtohome" href="/" style="margin-left:20px;">Back to Home</a>
+{% endblock %}

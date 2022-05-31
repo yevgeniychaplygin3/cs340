@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% block title %}
+Customers Page
+{% endblock %}
+{% block script %}
+{% endblock %}
+
+{% block container %}
+      <form action="{{ url_for('customer_results') }}" method="POST" style="margin-left:20px;">
+        <h3>Insert or update information about a customer</h3>
+            <div>
+                <label>First Name</label>
+                <input name="fname" required>
+            </div>
+            <div>
+                <label>Last Name</label>
+                <input name="lname" required>
+            </div>
+            <div>
+                <label>Phone</label>
+                <input name="phone">
+            </div>
+            <div>
+                <label>Email</label>
+                <input name="email">
+            </div>
+            <div>
+                <label>Reward ID</label>
+                <input type="hidden"  name="" list="select1" id="">
+                <select name="reward_id" id="select1">
+                    <option value=""></option>
+                    {% for i in reward_options %}
+                    <option value={{i}}>{{i}}</option>
+                    {% endfor %}
+                </select>
+                <label for="">NULL</label>
+                <input name="checknull" type="checkbox">
+            </div>
+            <div>
+                <button type="submit" class="btn btn-deault" name="insertbutton">Insert Customer Info</button>
+                <button type="submit" class="btn btn-deault" name="updatebutton">Update Customer Info</button>
+            </div>
+    </form>
+    <p style="margin-left:15px;">{{ customer_results }}</p>
+    <p style="margin-left:15px;">{{ customer_results_error }}</p>
+
+    <form action="{{ url_for('customer_results')}}"  method="POST" style="margin-left:20px;">
+        <h3>Search customer information</h3>
+        <div>
+            <div class="form-group">
+                <label>First Name</label>
+                <input name="fname">
+            </div>
+            <div class="form-group">
+                <label>Last Name</label>
+                <input name="lname" >
+            </div>
+            <button name="searchbutton" class="btn btn-deault">Search</button>
+            <button name="" class="btn btn-deault">Show all</button>
+        </div>
+    <br>
+   <!-- <p>{{ table }} </p> -->
+   <table >
+    <thead>
+       <th>ID</th>
+       <th>Reward ID</th>
+       <th>Phone</th>
+       <th>Email</th>
+       <th>First Name</th>
+       <th>Last Name</th>
+    </thead>
+
+    {% for i in customer_info %}
+    <tr>
+        <td>{{ i.0 }} </td>
+        <td>{{ i[1] }} </td>
+        <td>{{ i[2] }} </td>
+        <td>{{ i[3] }} </td>
+        <td>{{ i[4] }} </td> 
+        <td>{{ i[5] }} </td>
+    </tr>
+    {% endfor %}
+    </table></form>
+<a id="backtohome" href="/" style="margin-left:20px;">Back to Home</a>
+{% endblock %}
