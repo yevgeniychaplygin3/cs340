@@ -30,14 +30,6 @@ table {
     margin: 5px 5px 5px 0px;
 }
 
-img {
-    border:			0;
-}
-
-#meta {
-    width:			100%;
-    clear:			both;
-}
 
 #meta .button {
     margin:			0 5px 0 0;
@@ -47,32 +39,6 @@ td {
     padding:		0 2px 0 2px;
     vertical-align:	top;
     width: 5px;
-}
-
-
-td.name {
-    background:		#ffffff;
-    border:			1px solid #000000;
-}
-
-td.type {
-    background:		#ffffff;
-    border:			1px solid #000000;
-}
-
-td.count {
-    background:		#ffffff;
-    border:			1px solid #000000;
-}
-
-td.owner {
-    background:		#ffffff;
-    border:			1px solid #000000;
-}
-
-td.cell {
-    background:		#ffffff;
-    border:			1px solid #000000;
 }
 
 #backtohome{
@@ -98,42 +64,11 @@ a:hover	{
     text-decoration:	none;
 }
 
-.footer	{
-    font-size:		70%;
-    margin-top:		5px;
-}
-
-.sbutton {
-    border:			#999999 1px solid;
-}
-
 .btn, .btn-deault {
     border:			#999999 1px solid;
     margin-top:     4px;
 }
-.input {
-    border:			#999999 1px solid;
-}
-.sinput {
-    border: 		#999999 1px solid;
-}
-
-textarea {
-    width:			100%;
-}
-
-input.wide {
-    width:			100%;
-}
-
-.letternotavailable { 
-    color:			#CCCCCC;
-}
 
 td.checkbox {
     width:			5px;
-}
-
-.normaltext {
-    font-size:		80%;
 }
